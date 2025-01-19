@@ -24,12 +24,25 @@ loginForm.addEventListener('submit', function(e) {
     const username = document.querySelector('#username').value.trim();
     const password = document.querySelector('#password').value.trim();
     const errorContainer = document.querySelector('#error-message');
+    const successContainer = document.querySelector('#success-message');
+    if (!errorContainer) {
+        console.error('Error container not found');
+        return;
+    }
 
-    const user = users.find(function(user) {
+   // const user = users.find(user => user.username === username && user.password === password);
 
-    // if (!username || !password) {
-    //     errorContainer.textContent = 'Please fill in all fields';
-    // } else {
-    //     errorContainer.textContent = '';
-    //}
+   if(!username || !password) {
+    errorContainer.textContent = 'Please fill in all fields';
+   } else {
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+        errorContainer.textContent = '';
+        successContainer.textContent = `Welcome ${user.role}`;
+        //alert(`Welcome ${user.role}`);
+    } else {
+        errorContainer.textContent = 'Invalid username or password';
+      }
+   }
 });

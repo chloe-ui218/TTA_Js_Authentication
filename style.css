@@ -47,8 +47,16 @@ button{
     color: #fff;
     cursor: pointer;
 }
+button:hover{
+    background-color: #4a8;
+}
 .error-message{
     color: red;
     margin: 5px 0;
     text-align: center;
 }
+.success-message{
+    color: green;
+    margin: 5px 0;
+    text-align: center;
+} 
