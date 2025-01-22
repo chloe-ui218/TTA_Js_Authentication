@@ -16,6 +16,13 @@ const users = [
     }
 ];
 
+document.addEventListener('DOMContentLoaded', () => {
+    const savedRole = localStorage.getItem('userRole');
+    if (savedRole) {
+        displayContent(savedRole);
+    }
+})
+
 const loginForm = document.querySelector('#loginForm');
 
 loginForm.addEventListener('submit', function(e) {
@@ -40,6 +47,7 @@ loginForm.addEventListener('submit', function(e) {
         if (user) {
             errorContainer.textContent = ''; 
             successContainer.textContent = `Welcome ${user.role}`;
+            localStorage.setItem('userRole', user.role);
             displayContent(user.role);
         } else {
             errorContainer.textContent = 'Invalid username or password';
