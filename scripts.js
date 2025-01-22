@@ -57,18 +57,18 @@ function displayContent(role) {
 
     if(role === 'admin') {
         contentDiv.innerHTML = `
-        <h1>Welcome ${role}</h1>
+        <h2>Welcome ${role}</h2>
         <p>You have access to manage all data and settings</p>`
 
 
     } else if(role === 'editor') {
         contentDiv.innerHTML = `
-        <h1>Welcome ${role}</h1>
+        <h2>Welcome ${role}</h2>
         <p>You have access to edit content</p>`
 
     }else if(role === 'viewer') {
         contentDiv.innerHTML = `
-        <h1>Welcome ${role}</h1>
+        <h2>Welcome ${role}</h2>
         <p>You have access to view content</p>`
     }
     document.body.appendChild(contentDiv);

@@ -60,3 +60,19 @@ button:hover{
     margin: 5px 0;
     text-align: center;
 } 
+.content {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.content h2 {
+    margin: 5px 0px;
+    color: #333;
+    text-align: center;
+}
+.content p{
+    margin: 10px 0;
+    color: #333;
+}
