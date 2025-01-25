@@ -86,15 +86,21 @@ function displayContent(role) {
     if (role === 'admin') {
         contentDiv.innerHTML = `
             <h2>Welcome ${role}</h2>
-            <p>You have access to manage all data and settings</p>`;
+            <button class="create-button">Create</button>
+            <button class="view-button">View</button>
+            <button class="edit-button">Edit</button>
+            <button class="delete-button">Delete</button>`;
     } else if (role === 'editor') {
         contentDiv.innerHTML = `
-            <h2>Welcome ${role}</h2>
-            <p>You have access to edit content</p>`;
+            <h2>Welcome ${role}</h2
+            <button>View</button>
+            <button>Edit</button>
+            <button>Delete</button>`;
     } else if (role === 'viewer') {
         contentDiv.innerHTML = `
             <h2>Welcome ${role}</h2>
-            <p>You have access to view content</p>`;
+            <button>View</button>
+            // <button>Edit</button>`;
     }
 
     const logoutButton = document.createElement('button');
