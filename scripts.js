@@ -20,66 +20,94 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedRole = localStorage.getItem('userRole');
     if (savedRole) {
         displayContent(savedRole);
-    }
-})
-
-const loginForm = document.querySelector('#loginForm');
-
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const username = document.querySelector('#userName').value.trim();
-    const password = document.querySelector('#password').value.trim();
-    const errorContainer = document.querySelector('#errorMessage');
-    const successContainer = document.querySelector('#successMessage');
-
-    if (!errorContainer || !successContainer) {
-        console.error('Error or success container not found');
-        return;
-    }
-
-    if (!username || !password) {
-        errorContainer.textContent = 'Please fill in all fields';
-        successContainer.textContent = ''; // Clear success message
     } else {
-        const user = users.find(user => user.username === username && user.password === password);
-
-        if (user) {
-            errorContainer.textContent = ''; 
-            successContainer.textContent = `Welcome ${user.role}`;
-            localStorage.setItem('userRole', user.role);
-            displayContent(user.role);
+        const loginContainer = document.querySelector('.login-container');
+        if (loginContainer) {
+            loginContainer.style.display = 'block';
         } else {
-            errorContainer.textContent = 'Invalid username or password';
-            successContainer.textContent = ''; 
+            console.error('Login container not found');
         }
     }
 });
 
+const loginForm = document.querySelector('#loginForm');
+
+if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const username = document.querySelector('#userName').value.trim();
+        const password = document.querySelector('#password').value.trim();
+        const errorContainer = document.querySelector('#errorMessage');
+        const successContainer = document.querySelector('#successMessage');
+
+        if (!errorContainer || !successContainer) {
+            console.error('Error or success container not found');
+            return;
+        }
+
+        if (!username || !password) {
+            errorContainer.textContent = 'Please fill in all fields';
+            successContainer.textContent = '';
+        } else {
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                errorContainer.textContent = '';
+                successContainer.textContent = `Welcome ${user.role}`;
+                localStorage.setItem('userRole', user.role);
+                displayContent(user.role);
+            } else {
+                errorContainer.textContent = 'Invalid username or password';
+                successContainer.textContent = '';
+            }
+        }
+    });
+} else {
+    console.error('Login form not found');
+}
+
 function displayContent(role) {
     const loginContainer = document.querySelector('.login-container');
-    loginContainer.style.display = 'none';
+    if (loginContainer) {
+        loginContainer.style.display = 'none';
+    } else {
+        console.error('Login container not found');
+    }
+
+    const existingContent = document.querySelector('.content');
+    if (existingContent) {
+        existingContent.remove();
+    }
 
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content');
 
-    if(role === 'admin') {
+    if (role === 'admin') {
         contentDiv.innerHTML = `
-        <h2>Welcome ${role}</h2>
-        <p>You have access to manage all data and settings</p>`
-
-
-    } else if(role === 'editor') {
+            <h2>Welcome ${role}</h2>
+            <p>You have access to manage all data and settings</p>`;
+    } else if (role === 'editor') {
         contentDiv.innerHTML = `
-        <h2>Welcome ${role}</h2>
-        <p>You have access to edit content</p>`
-
-    }else if(role === 'viewer') {
+            <h2>Welcome ${role}</h2>
+            <p>You have access to edit content</p>`;
+    } else if (role === 'viewer') {
         contentDiv.innerHTML = `
-        <h2>Welcome ${role}</h2>
-        <p>You have access to view content</p>`
+            <h2>Welcome ${role}</h2>
+            <p>You have access to view content</p>`;
     }
+
+    const logoutButton = document.createElement('button');
+    logoutButton.textContent = 'Logout';
+    logoutButton.classList.add('logout-button');
+
+    logoutButton.addEventListener('click', logout);
+
+    contentDiv.appendChild(logoutButton);
     document.body.appendChild(contentDiv);
 }
 
-   
+function logout() {
+    localStorage.removeItem('userRole');
+    location.reload();
+}

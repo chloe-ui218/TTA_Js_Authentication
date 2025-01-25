@@ -76,3 +76,11 @@ button:hover{
     margin: 10px 0;
     color: #333;
 }
+
+.logout-button{
+    width: 95%;
+    background-color: #ff6666;
+}
+.logout-button:hover {
+    background-color: #ff1a1a;
+}
